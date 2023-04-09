@@ -1,26 +1,24 @@
 from random import randint
 
-def generate_question():
-    num1 = random.randint(1, 10)
-    num2 = random.randint(1, 10)
-    return (num1, num2)
+correct = 0
+wrong = 0
 
-def ask_question(question_num, question):
-    print(f"Question {question_num}: {question[0]} x {question[1]} = ")
-    user_answer = int(input())
-    correct_answer = question[0] * question[1]
-    if user_answer == correct_answer:
+for num in range(10):
+    num_1 = randint(1, 10)
+    num_2 = randint(1, 10)
+    num_3 = num_1 * num_2
+    print(num_1, "x", num_2, "=")
+    answer = int(input("What is the answer? : "))
+
+    if answer == num_3:
+        correct = correct + 1
         print("Right!")
-        return 1
     else:
-        print(f"Wrong! The right answer is {correct_answer}")
-        return 0
+        wrong = wrong + 1
+        print("Wrong. The right answer is :", num_3)
 
-print("Welcome to the multiplication game!")
-score = 0
-
-for i in range(1, 11):
-    question = generate_question()
-    score += ask_question(i, question)
-
-print(f"Game over! You got {score} out of 10 questions correct.")
+if correct >= 7:
+    passed = "passed"
+else:
+    passed = "failed"
+print("Number of answered questions is: ", correct, " correct and", wrong, " incorrect, you ", passed, " the test.")
